@@ -17,3 +17,22 @@ def open_wiki():
                 data = json.loads(line)
                 value = re.sub(r,'',data['text'])
                 result.append(value)
+    for n in file[5:8]:
+        for m in range(100):
+            for line in open('wiki_zh/{}/wiki_{}'.format(n,str(m).zfill(2))): 
+                data = json.loads(line)
+                value = re.sub(r,'',data['text'])
+                result.append(value)
+    for n in file[9:11]:
+        for m in range(100):
+            for line in open('wiki_zh/{}/wiki_{}'.format(n,str(m).zfill(2))):
+                data = json.loads(line)
+                value = re.sub(r,'',data['text'])
+                result.append(value)
+    for m in range(74):
+        for line in open('wiki_zh/{}/wiki_{}'.format('AM',str(m).zfill(2))):
+            data = json.loads(line)
+            value = re.sub(r,'',data['text'])
+            result.append(value)
+            
+    return result
