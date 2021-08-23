@@ -1,0 +1,19 @@
+import json
+from opencc import OpenCC
+import jieba
+import re
+from gensim.models import word2vec
+import numpy
+
+r = '[）\（\：\·\，\。\“ \”\?\？\」\「\……\、\《\》\；\)\(]'
+file = ['AA','AB','AC','AD','AE','AF','AG','AH','AI','AJ','AK','AL']
+cc = OpenCC('s2t')
+
+def open_wiki():
+    result =[]
+    for n in file[0:4]:
+        for m in range(100):
+            for line in open('wiki_zh/{}/wiki_{}'.format(n,str(m).zfill(2))):
+                data = json.loads(line)
+                value = re.sub(r,'',data['text'])
+                result.append(value)
