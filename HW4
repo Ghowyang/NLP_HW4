@@ -36,3 +36,15 @@ def open_wiki():
             result.append(value)
             
     return result
+
+def chine(result):
+    value = []
+    for line in result:
+        a = cc.convert(line)
+        value.append(a)
+    return value
+    
+def get_stopword_list():       
+    with open('wiki_zh/cn_stopwords.txt') as f: 
+        stopword_list = [word.strip('\n') for word in f.readlines()]
+    return stopword_list
