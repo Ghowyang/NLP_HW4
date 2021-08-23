@@ -48,3 +48,42 @@ def get_stopword_list():
     with open('wiki_zh/cn_stopwords.txt') as f: 
         stopword_list = [word.strip('\n') for word in f.readlines()]
     return stopword_list
+
+
+def word2():
+    train_data = word2vec.LineSentence('test.txt')
+    sg = 0
+    vector_size = 300
+    workers = 4
+    epochs = 5
+    model = word2vec.Word2Vec(
+        train_data,
+        vector_size=vector_size,
+        workers=workers,
+        epochs=epochs,
+        sg=sg,
+    )
+    model.save('word2vec.model')
+
+def macktxt(value):
+    stop = get_stopword_list()
+    f = open('test1.txt','w')
+
+    print(len(value))
+
+    jieba.set_dictionary('/usr/local/lib/python3.9/site-packages/jieba/dict.txt')
+    jieba.load_userdict("txt2.txt")  
+
+    for line in value :  
+        data = jieba.lcut(line,cut_all=False)
+        for val in data:
+            if val not in stop:
+                f.write(val+' ')
+        # f.write('\n')
+    f.close
+def test(string):
+    model = word2vec.Word2Vec.load('word2vec.model')
+    # print(model.wv['生物'].shape)
+
+    for item in model.wv.most_similar(string,topn=20):
+        print(item)
